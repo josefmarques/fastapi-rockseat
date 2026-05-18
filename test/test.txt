@@ -1,0 +1,2 @@
+existe covenção de criar a pasta test externa e ir adicionando os testes.
+Aqui o professor disse que prefere deixar dentro da própria pasta que já vai vendo se o teste foi feito
