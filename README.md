@@ -14,3 +14,7 @@ disable=
       C0209, #consider-using-f-string
       C0115, #missing-class-docstring
 
+pip install fastapi
+pip install uvicorn
+pip freeze > requirements.txt
+
