@@ -1,5 +1,5 @@
 python3 -m venv venv
-source/venv/bin/activate ou . venv/bin/activate
+source venv/bin/activate ou . venv/bin/activate
 pip install pylint
 pylint --generate-rcfile > .pylintrc (para formatação de código)
 ## instalar extensão vscode pylint
@@ -22,3 +22,6 @@ pip install SQLAlchemy
 pip install aiopg
 pip install sqlalchemy psycopg2-binary
 pip install asyncpg
+
+pip install pytest
+pip install pytest-asyncio

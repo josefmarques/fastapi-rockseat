@@ -7,10 +7,10 @@ CONNECTION_STRING = "postgresql+asyncpg://zemarques:mrq831028@localhost:5432/est
 
 engine = create_async_engine(
     CONNECTION_STRING,
-    echo=False,
-    pool_size=2,
-    max_overflow=0,
-    pool_timeout=30
+    echo=False, # impede que o SQLAlchemy imprima no terminal todos os comandos SQL que estão sendo executados nos bastidores.
+    pool_size=2, # não criar mais d
+    max_overflow=0, # não permitir conexões extras além do limite de 2
+    pool_timeout=30 # tempo máximo de espera para pegar uma conexão do pool antes de gerar um erro
 )
 
 async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
