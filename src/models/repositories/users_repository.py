@@ -1,4 +1,4 @@
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 from src.models.entities.users import Users
 from src.models.settings.database_connection_handler import DBConnectionHandler
 
@@ -10,7 +10,14 @@ class UsersRepository:
             await db.session.execute(query) #Dispara o comando SQL montado para o banco de dados. O await sinaliza que o Python deve pausar essa função específica até o PostgreSQL terminar o processamento.
             await db.session.commit() #Confirma a transação. O banco de dados só grava a informação definitivamente no disco após receber o comando de commit. Sem essa linha, a inserção seria revertida automaticamente ao encerrar a sessão.
 
-
+    async def get_users_by_name(self, user_name: str) -> list[dict]: #Define o método como assíncrono e especifica que ele retornará uma lista de objetos do tipo Users.
+        async with DBConnectionHandler() as db: #Abre uma sessão segura com o banco de dados, garantindo que ela será fechada automaticamente ao final do bloco.
+            query = (
+                select(Users)
+                .where(Users.c.user_name == user_name)
+            )
+            result = await query.all() #Executa a consulta e aguarda o resultado. O método all() retorna todos os registros que atendem à condição especificada.
+            return result #Retorna a lista de usuários encontrados para o chamador da função.
 
 
 
