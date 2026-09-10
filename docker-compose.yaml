@@ -1,0 +1,24 @@
+services:  
+  db:
+    image: postgres:17
+    container_name: postgres-local
+    restart: always
+    ports:
+      - "5432:5432" # <-- ADICIONADO: Para você acessar o banco localmente pelo DBeaver/DataGrip
+    environment:
+      POSTGRES_PASSWORD: mrq831028
+      POSTGRES_USER: zemarques
+      POSTGRES_DB: estoque-db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      # Nome do volume alterado para não conflitar caso você teste produção na mesma máquina
+      - postgres_data_local:/var/lib/postgresql/data
+    networks:
+      - network-local
+
+# Declarações obrigatórias na raiz para referenciar os itens acima
+volumes:
+  postgres_data_local:
+
+networks:
+  network-local:

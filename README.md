@@ -18,3 +18,7 @@ pip install fastapi
 pip install uvicorn
 pip freeze > requirements.txt
 
+pip install SQLAlchemy
+pip install aiopg
+pip install sqlalchemy psycopg2-binary
+pip install asyncpg
