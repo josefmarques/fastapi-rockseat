@@ -2,9 +2,9 @@
 from sqlalchemy import insert, select, update, delete
 from src.models.entities.users import Users
 from src.models.settings.database_connection_handler import DBConnectionHandler
+from .interfaces.users_repository import UsersRepositoryInterface
 
-
-class UsersRepository:
+class UsersRepository(UsersRepositoryInterface):
     async def insert_users(self, user_infos: dict) -> None: #Define o método como assíncrono, permitindo que a aplicação atenda outras requisições enquanto aguarda a resposta do banco de dados.
         async with DBConnectionHandler() as db: #Aciona o gerenciador de contexto criado no passo anterior. Ele abre uma conexão segura com o PostgreSQL (__aenter__) e garante que ela será fechada automaticamente ao final do bloco (__aexit__), prevenindo vazamentos de memória.
             query = insert(Users).values(**user_infos) #Constrói a instrução SQL de inserção. O operador ** desempacota o dicionário user_infos, extraindo as chaves (ex: user_name, age) e inserindo seus respectivos valores diretamente nas colunas correspondentes da tabela.
